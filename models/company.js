@@ -1,29 +1,39 @@
 require('./db');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-//https://github.com/Automattic/mongoose/issues/1630
-
-var indexName = 'llamaway';
-var typeName = 'adventures';
 
 var adventureSchema = new Schema({
+	_id:Schema.Types.ObjectId
+},{strict: true});
+
+var companySchema = new Schema({
 	name:String,
-	activityType:[{
+	contactName:{
+		type:String,
+		select:false
+	},
+	pageName: String, 
+	description:String,
+	activities:	[{
 		id:Number,
 		name: String
 	}],
-	description:String,
-	place:String,
-	takeDays:Boolean,
-	duration:Number,
-	difficulty:Number,
-	price:Number,
-	startDate:Date,	
-	finishDate:Date,
-	companyId:Schema.Types.ObjectId,
+	phone:{
+		type:String,
+		select:false
+	},
 	ownerId:{
 		type: Schema.Types.ObjectId,
 		select: false
+	},
+	adventures:{
+		type:[adventureSchema],
+		select:false
+	},
+	adventuresCount:Number,
+	profile_picture:{
+		imageId:Schema.Types.ObjectId,
+		url:String
 	},
 	created_at:{
 		type:Date,
@@ -33,16 +43,7 @@ var adventureSchema = new Schema({
 		type:Date,
 		default:Date.now
 	},
-	profile_picture:[{
-		imageId:Schema.Types.ObjectId,
-		url:String
-	}],
-	adventurePictureCount:Number,
-	currency: Number,
-	payMethod:[{
-		id:Number,
-		name: String
-	}],
+	leads: Number,
 	golocation:{
 	    formatted_address : String,
 		address_components: {
@@ -69,4 +70,7 @@ var adventureSchema = new Schema({
 	}	
 });
 
-module.exports = mongoose.model('Adventure', adventureSchema);
+var Model = mongoose.model('Company', companySchema);
+
+
+module.exports = Model;
