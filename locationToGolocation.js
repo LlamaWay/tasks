@@ -14,8 +14,6 @@ var options = {
 };
 
 geocoder.selectProvider(options.provider);
-//var geocoder = NodeGeocoder(options); 
-
 
 (function() {
     var getAddressComponents = function (idetails) {
@@ -48,8 +46,6 @@ geocoder.selectProvider(options.provider);
 
         return location;
     }
-    //"$where": "this.adventures.length == 0", adventuresCount: { "$exists": false }
-     //Company.find({_id:'57d9a9b64656f1880b4f0eb8', '_geoloc.lat':{$exists:true}, 'golocation':{$exists:false}}, function(err, companies){
 /*
     Company.find({'location':{$exists:true}, 'golocation':{$exists:false}}, function(err, companies){
         if(err){
@@ -105,7 +101,7 @@ geocoder.selectProvider(options.provider);
         process.exit(1);
     });
 */
-    Adventure.find({'location':{$exists:true}, 'golocation':{$exists:false}}, function(err, adventures){
+ /*   Adventure.find({'location':{$exists:true}, 'golocation':{$exists:false}}, function(err, adventures){
         if(err){
             console.error('Error to find adventures', err);
             console.error('Stack: ', err.stack);
@@ -158,4 +154,5 @@ geocoder.selectProvider(options.provider);
     }).catch(function(err){
         process.exit(1);
     });
+*/
 })();
